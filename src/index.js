@@ -84,7 +84,12 @@ export default function DrawingArea({ ctx }) {
    * Rerenders all strokes in the state to the context.
    */
   function render() {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    if(state.backgroundColor) {
+      ctx.fillStyle = state.backgroundColor
+      ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+    } else {
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    }
     strokes.forEach(renderStroke);
   }
   

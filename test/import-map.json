@@ -1,0 +1,5 @@
+{
+    "imports": {
+        "d3-shape": "//unpkg.com/d3-shape?module"
+    }
+}

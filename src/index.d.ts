@@ -23,6 +23,7 @@ interface IDrawingAreaState {
 	strokeStyle: string
 	smoothing: ESmoothLevel
 	powerSaver: boolean
+	backgroundColor?: string
 }
 
 interface IDrawingAreaParams {
