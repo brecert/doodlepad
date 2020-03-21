@@ -25,9 +25,6 @@ export default function DrawingArea({ ctx }) {
   let redoCache = [];
   let isDrawing = false;
 
-  ctx.lineJoin = "round";
-  ctx.lineCap = "round";
-
   /**
    * @type {IDrawingAreaState}
    */
@@ -58,6 +55,9 @@ export default function DrawingArea({ ctx }) {
    * @param {IStroke} stroke The stroke to render.
    */
   function renderStroke(stroke) {
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    
     ctx.beginPath();
     if (stroke.smoothing === EnumSmoothLevel.ADVANCED) {
       curve.lineStart();
