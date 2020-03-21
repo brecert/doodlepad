@@ -59,12 +59,12 @@ export default function DrawingArea({ ctx }) {
    */
   function renderStroke(stroke) {
     ctx.beginPath();
-    if (state.smoothing === EnumSmoothLevel.ADVANCED) {
+    if (stroke.smoothing === EnumSmoothLevel.ADVANCED) {
       curve.lineStart();
       stroke.points.forEach(point => curve.point(...point));
       if (stroke.points.length === 1) curve.point(...stroke.points[0]);
       curve.lineEnd();
-    } else if (state.smoothing === EnumSmoothLevel.BASIC) {
+    } else if (stroke.smoothing === EnumSmoothLevel.BASIC) {
       groupNth(stroke.points, 2).forEach(([from, to], i) => {
         if (!from) return;
         curveFromTo(ctx, from, to || from);
