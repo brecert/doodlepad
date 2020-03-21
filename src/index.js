@@ -57,7 +57,6 @@ export default function DrawingArea({ ctx }) {
   function renderStroke(stroke) {
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
-    
     ctx.beginPath();
     if (stroke.smoothing === EnumSmoothLevel.ADVANCED) {
       curve.lineStart();
@@ -121,9 +120,13 @@ export default function DrawingArea({ ctx }) {
   function drawStartHandler(event) {
     isDrawing = true;
     redoCache = [];
+    const pos = getCursorPosition(event);
 
+    /**
+     * @type {IStroke}
+     */
     const stroke = {
-      points: [],
+      points: [[pos.x, pos.y]],
       lineWidth: state.lineWidth,
       strokeStyle: state.strokeStyle,
       smoothing: state.smoothing
@@ -168,12 +171,38 @@ export default function DrawingArea({ ctx }) {
     fn(e.touches[0])
   }
 
-  ctx.canvas.addEventListener("mousedown", drawStartHandler);
-  ctx.canvas.addEventListener("touchstart", e => handleTouchEvent(drawStartHandler, e));
-  window.addEventListener("mousemove", drawHandler);
-  window.addEventListener("touchmove", e => handleTouchEvent(drawHandler, e));
-  window.addEventListener("mouseup", drawStopHandler);
-  window.addEventListener("touchend", e => handleTouchEvent(drawStopHandler, e));
+  /**
+   * @type {any}
+   */
+  const handler = {
+    /** @param {TouchEvent|MouseEvent} e */
+    handleEvent(e) {
+      this['on'+e.type](e)
+    },
+
+    onmousedown: drawStartHandler,
+
+    /** @param {TouchEvent} e */
+    ontouchstart: e => handleTouchEvent(drawStartHandler, e),
+
+    onmousemove: drawHandler,
+
+    /** @param {TouchEvent} e */
+    ontouchmove: e => handleTouchEvent(drawHandler, e),
+
+    onmouseup: drawStopHandler,
+
+    /** @param {TouchEvent} e */
+    ontouchend: e => handleTouchEvent(drawStopHandler, e)
+  }
+
+  // todo: use handleEvent
+  ctx.canvas.addEventListener("mousedown", handler);
+  ctx.canvas.addEventListener("touchstart", handler);
+  window.addEventListener("mousemove", handler);
+  window.addEventListener("touchmove", handler);
+  window.addEventListener("mouseup", handler);
+  window.addEventListener("touchend", handler);
 
   this.context = ctx;
   this.state = state;
@@ -182,6 +211,14 @@ export default function DrawingArea({ ctx }) {
   this.render = render;
   this.renderStroke = renderStroke;
   this.strokes = strokes;
+  this.removeEventListeners = () => {
+    ctx.canvas.removeEventListener("mousedown", handler);
+    ctx.canvas.removeEventListener("touchstart", handler);
+    window.removeEventListener("mousemove", handler);
+    window.removeEventListener("touchmove", handler);
+    window.removeEventListener("mouseup", handler);
+    window.removeEventListener("touchend", handler);
+  }
 
   return this;
 }

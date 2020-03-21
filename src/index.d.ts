@@ -66,6 +66,11 @@ declare class DrawingArea {
 	 * @param stroke The stroke to render
 	 */
 	public renderStroke(stroke: IStroke): void
+
+	/**
+	 * Removes all currently attatched event listeners
+	 */
+	public removeEventListeners(): void
 }
 
 declare function DrawingArea(params: IDrawingAreaParams): DrawingArea
