@@ -24,6 +24,7 @@ export default class DrawingArea {
     render: () => void;
     renderStroke: (stroke: IStroke) => void;
     strokes: IStroke[];
+    removeEventListeners: () => void;
 }
 export namespace EnumSmoothLevel {
     export const NONE: number;
