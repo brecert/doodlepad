@@ -279,6 +279,8 @@ export default class PaintingContext {
       this.ctx.lineTo(from[0], from[1])
       if (to) {
         this.ctx.lineTo(to[0], to[1])
+      } else {
+        this.ctx.lineTo(from[0], from[1])
       }
     }
   }
@@ -286,6 +288,10 @@ export default class PaintingContext {
   renderSmoothStroke(stroke: IStrokePaint) {
     this.curve.lineStart()
     stroke.points.forEach((point) => this.curve.point(point[0], point[1]))
+    if(stroke.points.length === 1) {
+      const [x, y] = stroke.points[0]
+      this.curve.point(x, y)
+    }
     this.curve.lineEnd()
   }
 
@@ -317,10 +323,18 @@ export default class PaintingContext {
     } else {
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
     }
-
     this.strokes.forEach((stroke) => {
       if (stroke.type === 'paint') {
-        this.renderStrokePaint(stroke)
+        if(stroke.points.length === 1) {
+          console.log(this.state.strokeColor)
+          this.ctx.fillStyle = this.state.strokeColor
+          const [x, y] = stroke.points[0]
+          this.ctx.beginPath()
+          this.ctx.arc(x, y, stroke.strokeWidth/2, 0, 2 * Math.PI);
+          this.ctx.fill()
+        } else {
+          this.renderStrokePaint(stroke)
+        }
       } else if (stroke.type === 'remove') {
         throw new Error(
           'Remove is unimplemented, please use strokes with their color set to "backgroundColor"'

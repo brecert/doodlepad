@@ -45,6 +45,11 @@ const dp = new DoodlePad(ctx)
 dp.state.strokeColor = '#5555'
 canvas.draw = dp
 
+const state = {
+  color: '#000',
+  opacity: 1
+}
+
 document.body.appendChild(canvas)
 
 inputer(
@@ -66,9 +71,22 @@ inputer(
   { value: 10 }
 )
 
+const updateColor = () => dp.state.strokeColor = state.color + Math.round(state.opacity*255).toString(16)
+
 inputer('strokeColor', 'color', (event) => {
-  dp.state.strokeColor = event.currentTarget.value
+  state.color = event.currentTarget.value
+  updateColor()
 })
+
+inputer(
+  'opacity',
+  'range',
+  (event) => {
+    state.opacity = parseFloat(event.currentTarget.value)
+    updateColor()
+  },
+  { value: 1, min: 0, max: 1, step: 'any' }
+)
 
 inputer(
   'strokeSmoothing',
