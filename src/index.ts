@@ -1,4 +1,4 @@
-import { curveBasis, CurveGenerator } from 'd3-shape'
+import curveBasis, { CurveGenerator } from 'd3-shape/src/curve/basis'
 
 /**
  * @ignore
