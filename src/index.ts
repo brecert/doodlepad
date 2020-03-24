@@ -288,7 +288,7 @@ export default class PaintingContext {
   renderSmoothStroke(stroke: IStrokePaint) {
     this.curve.lineStart()
     stroke.points.forEach((point) => this.curve.point(point[0], point[1]))
-    if(stroke.points.length === 1) {
+    if (stroke.points.length === 1) {
       const [x, y] = stroke.points[0]
       this.curve.point(x, y)
     }
@@ -325,12 +325,12 @@ export default class PaintingContext {
     }
     this.strokes.forEach((stroke) => {
       if (stroke.type === 'paint') {
-        if(stroke.points.length === 1) {
+        if (stroke.points.length === 1) {
           console.log(this.state.strokeColor)
           this.ctx.fillStyle = this.state.strokeColor
           const [x, y] = stroke.points[0]
           this.ctx.beginPath()
-          this.ctx.arc(x, y, stroke.strokeWidth/2, 0, 2 * Math.PI);
+          this.ctx.arc(x, y, stroke.strokeWidth / 2, 0, 2 * Math.PI)
           this.ctx.fill()
         } else {
           this.renderStrokePaint(stroke)

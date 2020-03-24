@@ -47,7 +47,7 @@ canvas.draw = dp
 
 const state = {
   color: '#000',
-  opacity: 1
+  opacity: 1,
 }
 
 document.body.appendChild(canvas)
@@ -71,7 +71,9 @@ inputer(
   { value: 10 }
 )
 
-const updateColor = () => dp.state.strokeColor = state.color + Math.round(state.opacity*255).toString(16)
+const updateColor = () =>
+  (dp.state.strokeColor =
+    state.color + Math.round(state.opacity * 255).toString(16))
 
 inputer('strokeColor', 'color', (event) => {
   state.color = event.currentTarget.value
