@@ -326,7 +326,6 @@ export default class PaintingContext {
     this.strokes.forEach((stroke) => {
       if (stroke.type === 'paint') {
         if (stroke.points.length === 1) {
-          console.log(this.state.strokeColor)
           this.ctx.fillStyle = this.state.strokeColor
           const [x, y] = stroke.points[0]
           this.ctx.beginPath()
