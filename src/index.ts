@@ -132,7 +132,7 @@ export default class PaintingContext {
     strokeColor: '#000000',
     strokeWidth: 2,
     strokeSmoothness: StrokeSmoothness.ADVANCED,
-    lowQuality: true,
+    lowQuality: false,
   }
 
   protected curve: CurveGenerator
