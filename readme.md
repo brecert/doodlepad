@@ -4,6 +4,10 @@
 A simple doodle pad to use with canvas contexes
 > _todo: make generic, remove canvas context requirement_
 
+
+## Demo
+[demo](https://brecert.github.io/doodlepad/)
+
 ## Notes
 
 Make sure the canvas container has this css applied to it
