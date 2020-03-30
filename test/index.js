@@ -38,10 +38,10 @@ const inputer = (name, type, oninput, props = {}) => {
 }
 
 const canvas = document.createElement('canvas')
-canvas.width = 500
-canvas.height = 500
 const ctx = canvas.getContext('2d')
 const dp = new DoodlePad(ctx)
+dp.width = 500
+dp.height = 500
 dp.state.strokeColor = '#5555'
 canvas.draw = dp
 

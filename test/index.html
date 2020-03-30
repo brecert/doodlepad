@@ -15,18 +15,27 @@
         overflow: hidden;
       }
       canvas {
-        background: #fff;
         box-shadow: 0px 0px 3px #333;
       }
       .inputer {
+        position: relative;
         clear: both;
         width: 500px;
         display: flex;
+        float: right;
       }
 
       .inputer * {
         flex: 1;
         margin: 0 auto;
+      }
+
+      .canvas-container {
+        position: relative;
+      }
+
+      .canvas-container canvas {
+        position: absolute;
       }
     </style>
   </head>

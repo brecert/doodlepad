@@ -14,10 +14,16 @@ function getRelativePointerPosition(
   return { x, y }
 }
 
+/**
+ * Extra information and data to be stored with a point
+ */
 export interface IPointData {
   pressure: number
 }
 
+/**
+ * A point that stores `[x, y, data]`
+ */
 export type TPoint = [number, number, IPointData?]
 
 /**
@@ -36,13 +42,6 @@ export interface IStrokePaint {
   strokeColor: TStokeColor
   strokeWidth: number
   strokeSmoothness: StrokeSmoothness
-}
-
-export interface IStrokeRemove {
-  type: 'remove'
-
-  /** The removed points */
-  points: TPoint[]
 }
 
 export enum StrokeSmoothness {
@@ -79,7 +78,7 @@ export interface IPaintingContextState {
   strokeSmoothness: StrokeSmoothness
 
   /**
-   * If low quality is enabled certain optimizations will be put in place to reduce lag while doodling.
+   * If low quality is enabled certain optimizations will be put in place to reduce cpu/gpu usage while doodling.
    */
   lowQuality: boolean
 
@@ -89,7 +88,14 @@ export interface IPaintingContextState {
   backgroundColor?: string
 }
 
-export type TStroke = IStrokePaint | IStrokeRemove
+/**
+ * Placeholder type for future use if more strokes are added
+ */
+export type TStroke = IStrokePaint
+
+/**
+ * Placeholder type for future use if the format of `Strokes[]` changes
+ */
 export type TStrokes = TStroke[]
 
 /** @ignore */
@@ -105,17 +111,24 @@ const DefaultEmptyStroke: IStrokePaint = {
  * The painting context
  */
 export default class PaintingContext {
+  /**
+   * Stores stroke list with id of the pointer making the strokes
+   */
   pointerStrokes: Map<number, TStrokes> = new Map()
+
+  /**
+   * Retains strokes that have been undone for use to be redone
+   */
   redoStack: { id: number; stroke: TStroke }[] = []
 
   /**
-   * {@link this.strokePointers} keeps track of the positioning when rendering strokes.
-   * It holds the id and the stroke count to the pointerStroke in {@link this.pointerStrokes}
+   * keeps track of the positioning when rendering strokes.
+   * It holds the id and the stroke count to the pointerStroke in pointerStrokes
    */
   strokePointers: [number, number][] = []
 
   /**
-   * {@link this.activePointers} keeps track of what pointer event ids are currently active, and should be used for drawing
+   * keeps track of what pointer event ids are currently active, and should be used for drawing
    */
   activePointers: Set<number> = new Set()
 
@@ -135,6 +148,7 @@ export default class PaintingContext {
     lowQuality: false,
   }
 
+  /** @ignore */
   protected curve: CurveGenerator
 
   /**
@@ -161,9 +175,45 @@ export default class PaintingContext {
     })
   }
 
-  constructor(public ctx: CanvasRenderingContext2D) {
-    this.curve = curveBasis(ctx)
+  /**
+   * sets and gets both contexes width
+   */
+  set width(size: number) {
+    this.ctx.canvas.width = size
+    this.offscreenCtx.canvas.width = size
+  }
+
+  get width() {
+    return this.ctx.canvas.width
+  }
+
+  /**
+   * sets and gets both contexes height
+   */
+  set height(size: number) {
+    this.ctx.canvas.height = size
+    this.offscreenCtx.canvas.height = size
+  }
+
+  get height() {
+    return this.ctx.canvas.height
+  }
+
+  constructor(
+    public ctx: CanvasRenderingContext2D,
+    public offscreenCtx: CanvasRenderingContext2D = document
+      .createElement('canvas')!
+      .getContext('2d')!
+  ) {
+    this.curve = curveBasis(offscreenCtx)
     this.registerEventListeners()
+
+    this.offscreenCtx.lineJoin = 'round'
+    this.offscreenCtx.lineCap = 'round'
+
+    if (typeof this.offscreenCtx === 'undefined') {
+      throw new Error('offscreenCtx must be defined')
+    }
   }
 
   /**
@@ -171,8 +221,6 @@ export default class PaintingContext {
    */
   registerEventListeners() {
     this.ctx.canvas.addEventListener('pointerdown', this, false)
-    window.addEventListener('pointermove', this, false)
-    window.addEventListener('pointerup', this, false)
   }
 
   /**
@@ -187,12 +235,26 @@ export default class PaintingContext {
   /** @ignore */
   handleEvent(event: PointerEvent) {
     switch (event.type) {
-      case 'pointerdown':
-        return this.onStrokeStart(event)
-      case 'pointermove':
-        return this.onStrokePoint(event)
-      case 'pointerup':
-        return this.onStrokeStop(event)
+      case 'pointerdown': {
+        if (this.activePointers.size === 0) {
+          window.addEventListener('pointermove', this, false)
+          window.addEventListener('pointerup', this, false)
+        }
+        this.onStrokeStart(event)
+        break
+      }
+      case 'pointermove': {
+        this.onStrokePoint(event)
+        break
+      }
+      case 'pointerup': {
+        this.onStrokeStop(event)
+        if (this.activePointers.size === 0) {
+          window.removeEventListener('pointermove', this, false)
+          window.removeEventListener('pointerup', this, false)
+        }
+        break
+      }
     }
   }
 
@@ -236,8 +298,9 @@ export default class PaintingContext {
           pressure: event.pressure,
         })
       }
-      strokes[strokes.length - 1].points.push(point)
-      this.update(strokes?.[strokes.length - 1])
+      const lastStroke = strokes[strokes.length - 1]
+      this.drawPoint(event.pointerId, point)
+      lastStroke.points.push(point)
     }
   }
 
@@ -245,49 +308,72 @@ export default class PaintingContext {
   onStrokeStop(event: PointerEvent) {
     event.preventDefault()
     this.activePointers.delete(event.pointerId)
+
+    // rerender the scene for now, at some point in future this may not be needed
     this.render()
   }
 
-  update(stroke?: TStroke) {
-    if (!this.requestingFrame) {
-      if (this.state.lowQuality) {
-        switch (stroke?.type) {
-          case 'paint':
-            this.renderStrokePaint(stroke)
-            break
-          default:
-            this.render()
-            break
-        }
+  updateStyle(params: { strokeColor: string; strokeWidth: number }) {
+    // avoids changing canvas state when possible
+    if (this.offscreenCtx.strokeStyle !== params.strokeColor) {
+      this.offscreenCtx.strokeStyle =
+        params.strokeColor === 'backgroundColor'
+          ? this.state.backgroundColor || '#fff'
+          : params.strokeColor
+    }
+
+    // avoids changing canvas state when possible
+    if (this.offscreenCtx.lineWidth !== params.strokeWidth) {
+      this.offscreenCtx.lineWidth = params.strokeWidth
+    }
+  }
+
+  /** @ignore */
+  drawPoint(id: number, point: TPoint) {
+    const strokes = this.pointerStrokes.get(id)
+    if (strokes) {
+      const lastStroke = strokes[strokes.length - 1]
+      const lastPoint = lastStroke.points[lastStroke.points.length - 1] || point
+
+      // todo: fix
+      if (
+        this.state.lowQuality ||
+        lastStroke.strokeSmoothness === StrokeSmoothness.NONE
+      ) {
+        this.updateStyle(lastStroke)
+        this.offscreenCtx.beginPath()
+        this.offscreenCtx.moveTo(lastPoint[0], lastPoint[1])
+        this.offscreenCtx.lineTo(point[0], point[1])
+        this.offscreenCtx.stroke()
+        this.queueCommit()
       } else {
         this.render()
       }
-
-      if (this.activePointers.size > 0) {
-        this.requestingFrame = true
-        requestAnimationFrame(() => {
-          this.update()
-          this.requestingFrame = false
-        })
-      }
+    } else {
+      throw new Error(`No pointer stroke found for id: ${id}`)
     }
   }
 
-  renderBasicStroke(stroke: IStrokePaint) {
+  /** @ignore */
+  drawBasicStroke(stroke: IStrokePaint) {
     for (let i = 0; i < stroke.points.length; i += 2) {
       const [from, to] = stroke.points.slice(i, i + 2)
-      this.ctx.lineTo(from[0], from[1])
+      this.offscreenCtx.lineTo(from[0], from[1])
       if (to) {
-        this.ctx.lineTo(to[0], to[1])
+        this.offscreenCtx.lineTo(to[0], to[1])
       } else {
-        this.ctx.lineTo(from[0], from[1])
+        this.offscreenCtx.lineTo(from[0], from[1])
       }
     }
   }
 
-  renderSmoothStroke(stroke: IStrokePaint) {
+  /** @ignore */
+  drawSmoothStroke(stroke: IStrokePaint) {
     this.curve.lineStart()
-    stroke.points.forEach((point) => this.curve.point(point[0], point[1]))
+    for (let i = 0; i < stroke.points.length; i++) {
+      const point = stroke.points[i]
+      this.curve.point(point[0], point[1])
+    }
     if (stroke.points.length === 1) {
       const [x, y] = stroke.points[0]
       this.curve.point(x, y)
@@ -295,54 +381,124 @@ export default class PaintingContext {
     this.curve.lineEnd()
   }
 
-  renderStrokePaint(stroke: IStrokePaint) {
-    this.ctx.strokeStyle =
-      stroke.strokeColor === 'backgroundColor'
-        ? this.state.backgroundColor || '#fff'
-        : stroke.strokeColor
-    this.ctx.lineWidth = stroke.strokeWidth
-    this.ctx.beginPath()
+  /** @ignore */
+  drawPaintStroke(stroke: IStrokePaint) {
+    this.updateStyle(stroke)
+    this.offscreenCtx.beginPath()
     if (stroke.strokeSmoothness === StrokeSmoothness.NONE) {
-      this.renderBasicStroke(stroke)
+      this.drawBasicStroke(stroke)
     } else {
-      this.renderSmoothStroke(stroke)
+      this.drawSmoothStroke(stroke)
     }
-    this.ctx.stroke()
+    this.offscreenCtx.stroke()
+  }
+
+  /** @ignore */
+  drawStroke(stroke: TStroke) {
+    this.drawPaintStroke(stroke)
+  }
+
+  /** @ignore */
+  strokeQueued = false
+  /** @ignore */
+  strokeQueue: Set<number> = new Set()
+  /** @ignore */
+  queueStroke(id: number) {
+    this.strokeQueue.add(id)
+
+    if (!this.strokeQueued) {
+      this.strokeQueued = true
+      requestAnimationFrame(() => {
+        this.offscreenCtx.clearRect(0, 0, this.width, this.height)
+        // todo: optimize
+        for (const id of this.strokeQueue.keys()) {
+          const strokes = this.pointerStrokes.get(id)
+          if (strokes) {
+            const stroke = strokes[strokes.length - 1]
+            this.drawStroke(stroke)
+          }
+        }
+        this.strokeQueue.clear()
+        this.strokeQueued = false
+      })
+    }
+  }
+
+  /**
+   * @ignore
+   * moves the data from the offscreenCtx to the ctx and clears the offscreenCtx
+   */
+  commitData() {
+    this.ctx.drawImage(this.offscreenCtx.canvas, 0, 0)
+    this.offscreenCtx.clearRect(
+      0,
+      0,
+      this.offscreenCtx.canvas.width,
+      this.offscreenCtx.canvas.height
+    )
+  }
+
+  /** @ignore */
+  queued = false
+
+  /**
+   * @igore
+   */
+  queueCommit() {
+    if (!this.queued) {
+      this.queued = true
+      requestAnimationFrame(() => {
+        this.commitData()
+        this.queued = false
+      })
+    }
   }
 
   /**
    * Rerenders the entire state
    */
   render() {
-    this.ctx.lineJoin = 'round'
-    this.ctx.lineCap = 'round'
+    this.offscreenCtx.lineJoin = 'round'
+    this.offscreenCtx.lineCap = 'round'
 
     if (this.state.backgroundColor) {
-      this.ctx.fillStyle = this.state.backgroundColor
-      this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.width)
-    } else {
-      this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
-    }
-    this.strokes.forEach((stroke) => {
-      if (stroke.type === 'paint') {
-        if (stroke.points.length === 1) {
-          this.ctx.fillStyle = this.state.strokeColor
-          const [x, y] = stroke.points[0]
-          this.ctx.beginPath()
-          this.ctx.arc(x, y, stroke.strokeWidth / 2, 0, 2 * Math.PI)
-          this.ctx.fill()
-        } else {
-          this.renderStrokePaint(stroke)
-        }
-      } else if (stroke.type === 'remove') {
-        throw new Error(
-          'Remove is unimplemented, please use strokes with their color set to "backgroundColor"'
-        )
-      } else {
-        // for js users
-        throw new Error(`Invalid stroke type: ${(stroke as any).type}`)
+      if (this.offscreenCtx.fillStyle !== this.state.backgroundColor) {
+        this.offscreenCtx.fillStyle = this.state.backgroundColor
       }
-    })
+      this.offscreenCtx.fillRect(
+        0,
+        0,
+        this.offscreenCtx.canvas.width,
+        this.offscreenCtx.canvas.width
+      )
+    } else {
+      this.offscreenCtx.clearRect(
+        0,
+        0,
+        this.offscreenCtx.canvas.width,
+        this.offscreenCtx.canvas.height
+      )
+    }
+
+    for (let i = 0; i < this.strokePointers.length; i++) {
+      const [pointerId, strokeId] = this.strokePointers[i]
+      const stroke = this.pointerStrokes.get(pointerId)?.[strokeId]
+      if (stroke !== undefined) {
+        if (stroke.points.length === 1) {
+          this.updateStyle(stroke)
+          if (this.offscreenCtx.fillStyle !== stroke.strokeColor) {
+            this.offscreenCtx.fillStyle = stroke.strokeColor
+          }
+          const [x, y] = stroke.points[0]
+          this.offscreenCtx.beginPath()
+          this.offscreenCtx.arc(x, y, stroke.strokeWidth / 2, 0, 2 * Math.PI)
+          this.offscreenCtx.fill()
+        } else {
+          this.drawStroke(stroke)
+        }
+      }
+    }
+    this.queueCommit()
   }
 
   /**
@@ -370,7 +526,6 @@ export default class PaintingContext {
       if (strokes) {
         const sid = strokes.push(stroke)
         this.strokePointers.push([id, sid - 1])
-        this.update(stroke)
         this.render()
       } else {
         throw new Error('pointerStrokes redo id does not exist!')
