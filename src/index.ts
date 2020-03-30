@@ -135,12 +135,7 @@ export default class PaintingContext {
   /**
    * the state, meant to be modified
    */
-  state: IPaintingContextState = {
-    strokeColor: '#000000',
-    strokeWidth: 2,
-    strokeSmoothness: StrokeSmoothness.ADVANCED,
-    lowQuality: false,
-  }
+  state: IPaintingContextState
 
   /** @ignore */
   protected curve: CurveGenerator
@@ -199,6 +194,14 @@ export default class PaintingContext {
       .createElement('canvas')!
       .getContext('2d')!
   ) {
+
+    this.state = {
+      strokeColor: '#000000',
+      strokeWidth: 2,
+      strokeSmoothness: StrokeSmoothness.ADVANCED,
+      lowQuality: false,
+    }
+
     this.curve = curveBasis(offscreenCtx)
     this.registerEventListeners()
 
