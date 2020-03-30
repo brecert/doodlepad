@@ -133,12 +133,6 @@ export default class PaintingContext {
   activePointers: Set<number> = new Set()
 
   /**
-   * If the painting context is currently requesting a frame
-   * used to check if requestAnimationFrame should be called again
-   */
-  requestingFrame = false
-
-  /**
    * the state, meant to be modified
    */
   state: IPaintingContextState = {
