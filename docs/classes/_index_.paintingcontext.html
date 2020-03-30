@@ -96,37 +96,31 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.paintingcontext.html#activepointers" class="tsd-kind-icon">active<wbr>Pointers</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.paintingcontext.html#ctx" class="tsd-kind-icon">ctx</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_index_.paintingcontext.html#curve" class="tsd-kind-icon">curve</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.paintingcontext.html#offscreenctx" class="tsd-kind-icon">offscreen<wbr>Ctx</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.paintingcontext.html#pointerstrokes" class="tsd-kind-icon">pointer<wbr>Strokes</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.paintingcontext.html#redostack" class="tsd-kind-icon">redo<wbr>Stack</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.paintingcontext.html#requestingframe" class="tsd-kind-icon">requesting<wbr>Frame</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.paintingcontext.html#state" class="tsd-kind-icon">state</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.paintingcontext.html#strokepointers" class="tsd-kind-icon">stroke<wbr>Pointers</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_index_.paintingcontext.html#height" class="tsd-kind-icon">height</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_index_.paintingcontext.html#strokes" class="tsd-kind-icon">strokes</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="_index_.paintingcontext.html#width" class="tsd-kind-icon">width</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.paintingcontext.html#queuecommit" class="tsd-kind-icon">queue<wbr>Commit</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.paintingcontext.html#redo" class="tsd-kind-icon">redo</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.paintingcontext.html#registereventlisteners" class="tsd-kind-icon">register<wbr>Event<wbr>Listeners</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.paintingcontext.html#removeeventlisteners" class="tsd-kind-icon">remove<wbr>Event<wbr>Listeners</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.paintingcontext.html#render" class="tsd-kind-icon">render</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.paintingcontext.html#renderbasicstroke" class="tsd-kind-icon">render<wbr>Basic<wbr>Stroke</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.paintingcontext.html#rendersmoothstroke" class="tsd-kind-icon">render<wbr>Smooth<wbr>Stroke</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.paintingcontext.html#renderstrokepaint" class="tsd-kind-icon">render<wbr>Stroke<wbr>Paint</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.paintingcontext.html#undo" class="tsd-kind-icon">undo</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.paintingcontext.html#update" class="tsd-kind-icon">update</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Object literals</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-object-literal tsd-parent-kind-class"><a href="_index_.paintingcontext.html#state" class="tsd-kind-icon">state</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.paintingcontext.html#updatestyle" class="tsd-kind-icon">update<wbr>Style</a></li>
 							</ul>
 						</section>
 					</div>
@@ -138,19 +132,22 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Painting<wbr>Context<span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CanvasRenderingContext2D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.paintingcontext.html" class="tsd-signature-type">PaintingContext</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Painting<wbr>Context<span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CanvasRenderingContext2D</span>, offscreenCtx<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">CanvasRenderingContext2D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.paintingcontext.html" class="tsd-signature-type">PaintingContext</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:162</li>
+									<li>Defined in index.ts:189</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>ctx: <span class="tsd-signature-type">CanvasRenderingContext2D</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> offscreenCtx: <span class="tsd-signature-type">CanvasRenderingContext2D</span><span class="tsd-signature-symbol"> = document.createElement(&#x27;canvas&#x27;)!.getContext(&#x27;2d&#x27;)!</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_index_.paintingcontext.html" class="tsd-signature-type">PaintingContext</a></h4>
@@ -166,12 +163,12 @@
 					<div class="tsd-signature tsd-kind-icon">active<wbr>Pointers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new Set()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:120</li>
+							<li>Defined in index.ts:133</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>{@link this.activePointers} keeps track of what pointer event ids are currently active, and should be used for drawing</p>
+							<p>keeps track of what pointer event ids are currently active, and should be used for drawing</p>
 						</div>
 					</div>
 				</section>
@@ -181,17 +178,17 @@
 					<div class="tsd-signature tsd-kind-icon">ctx<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CanvasRenderingContext2D</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:164</li>
+							<li>Defined in index.ts:192</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-					<a name="curve" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> curve</h3>
-					<div class="tsd-signature tsd-kind-icon">curve<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CurveGenerator</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="offscreenctx" class="tsd-anchor"></a>
+					<h3>offscreen<wbr>Ctx</h3>
+					<div class="tsd-signature tsd-kind-icon">offscreen<wbr>Ctx<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CanvasRenderingContext2D</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:138</li>
+							<li>Defined in index.ts:193</li>
 						</ul>
 					</aside>
 				</section>
@@ -201,9 +198,14 @@
 					<div class="tsd-signature tsd-kind-icon">pointer<wbr>Strokes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../globals.html#tstrokes" class="tsd-signature-type">TStrokes</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new Map()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:108</li>
+							<li>Defined in index.ts:117</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Stores stroke list with id of the pointer making the strokes</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="redostack" class="tsd-anchor"></a>
@@ -211,23 +213,27 @@
 					<div class="tsd-signature tsd-kind-icon">redo<wbr>Stack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>stroke<span class="tsd-signature-symbol">: </span><a href="../globals.html#tstroke" class="tsd-signature-type">TStroke</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:109</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="requestingframe" class="tsd-anchor"></a>
-					<h3>requesting<wbr>Frame</h3>
-					<div class="tsd-signature tsd-kind-icon">requesting<wbr>Frame<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in index.ts:126</li>
+							<li>Defined in index.ts:122</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>If the painting context is currently requesting a frame
-							used to check if requestAnimationFrame should be called again</p>
+							<p>Retains strokes that have been undone for use to be redone</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="state" class="tsd-anchor"></a>
+					<h3>state</h3>
+					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_index_.ipaintingcontextstate.html" class="tsd-signature-type">IPaintingContextState</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in index.ts:138</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>the state, meant to be modified</p>
 						</div>
 					</div>
 				</section>
@@ -237,13 +243,13 @@
 					<div class="tsd-signature tsd-kind-icon">stroke<wbr>Pointers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in index.ts:115</li>
+							<li>Defined in index.ts:128</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>{@link this.strokePointers} keeps track of the positioning when rendering strokes.
-							It holds the id and the stroke count to the pointerStroke in {@link this.pointerStrokes}</p>
+							<p>keeps track of the positioning when rendering strokes.
+							It holds the id and the stroke count to the pointerStroke in pointerStrokes</p>
 						</div>
 					</div>
 				</section>
@@ -251,17 +257,59 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
 				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="height" class="tsd-anchor"></a>
+					<h3>height</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> height<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> height<span class="tsd-signature-symbol">(</span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in index.ts:187</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>sets and gets both contexes height</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in index.ts:182</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>sets and gets both contexes height</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>size: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
 					<a name="strokes" class="tsd-anchor"></a>
 					<h3>strokes</h3>
 					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> strokes<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><a href="../interfaces/_index_.istrokepaint.html" class="tsd-signature-type">IStrokePaint</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_index_.istrokeremove.html" class="tsd-signature-type">IStrokeRemove</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> strokes<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_index_.istrokepaint.html" class="tsd-signature-type">IStrokePaint</a><span class="tsd-signature-symbol">[]</span></li>
 						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> strokes<span class="tsd-signature-symbol">(</span>newStrokes<span class="tsd-signature-symbol">: </span><a href="../globals.html#tstroke" class="tsd-signature-type">TStroke</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:143</li>
+									<li>Defined in index.ts:146</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -269,12 +317,12 @@
 									<p>Gets the more complex pointerStrokes and strokePointers as a single simplified object for exports, data storage, etc...</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><a href="../interfaces/_index_.istrokepaint.html" class="tsd-signature-type">IStrokePaint</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_index_.istrokeremove.html" class="tsd-signature-type">IStrokeRemove</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_index_.istrokepaint.html" class="tsd-signature-type">IStrokePaint</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:152</li>
+									<li>Defined in index.ts:155</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -292,9 +340,74 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="width" class="tsd-anchor"></a>
+					<h3>width</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> width<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> width<span class="tsd-signature-symbol">(</span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in index.ts:175</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>sets and gets both contexes width</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in index.ts:170</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>sets and gets both contexes width</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>size: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="queuecommit" class="tsd-anchor"></a>
+					<h3>queue<wbr>Commit</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">queue<wbr>Commit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in index.ts:445</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>igore</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="redo" class="tsd-anchor"></a>
 					<h3>redo</h3>
@@ -305,7 +418,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:366</li>
+									<li>Defined in index.ts:520</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -327,7 +440,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:172</li>
+									<li>Defined in index.ts:220</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -349,7 +462,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:181</li>
+									<li>Defined in index.ts:227</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -371,7 +484,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:316</li>
+									<li>Defined in index.ts:458</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -379,75 +492,6 @@
 									<p>Rerenders the entire state</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="renderbasicstroke" class="tsd-anchor"></a>
-					<h3>render<wbr>Basic<wbr>Stroke</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Basic<wbr>Stroke<span class="tsd-signature-symbol">(</span>stroke<span class="tsd-signature-symbol">: </span><a href="../interfaces/_index_.istrokepaint.html" class="tsd-signature-type">IStrokePaint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in index.ts:276</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>stroke: <a href="../interfaces/_index_.istrokepaint.html" class="tsd-signature-type">IStrokePaint</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="rendersmoothstroke" class="tsd-anchor"></a>
-					<h3>render<wbr>Smooth<wbr>Stroke</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Smooth<wbr>Stroke<span class="tsd-signature-symbol">(</span>stroke<span class="tsd-signature-symbol">: </span><a href="../interfaces/_index_.istrokepaint.html" class="tsd-signature-type">IStrokePaint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in index.ts:288</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>stroke: <a href="../interfaces/_index_.istrokepaint.html" class="tsd-signature-type">IStrokePaint</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="renderstrokepaint" class="tsd-anchor"></a>
-					<h3>render<wbr>Stroke<wbr>Paint</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Stroke<wbr>Paint<span class="tsd-signature-symbol">(</span>stroke<span class="tsd-signature-symbol">: </span><a href="../interfaces/_index_.istrokepaint.html" class="tsd-signature-type">IStrokePaint</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in index.ts:298</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>stroke: <a href="../interfaces/_index_.istrokepaint.html" class="tsd-signature-type">IStrokePaint</a></h5>
-								</li>
-							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -462,7 +506,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:351</li>
+									<li>Defined in index.ts:505</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -475,85 +519,35 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="update" class="tsd-anchor"></a>
-					<h3>update</h3>
+					<a name="updatestyle" class="tsd-anchor"></a>
+					<h3>update<wbr>Style</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">(</span>stroke<span class="tsd-signature-symbol">?: </span><a href="../globals.html#tstroke" class="tsd-signature-type">TStroke</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Style<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>strokeColor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>strokeWidth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in index.ts:251</li>
+									<li>Defined in index.ts:314</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> stroke: <a href="../globals.html#tstroke" class="tsd-signature-type">TStroke</a></h5>
+									<h5>params: <span class="tsd-signature-symbol">{ </span>strokeColor<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>strokeWidth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>stroke<wbr>Color<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>stroke<wbr>Width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+										</li>
+									</ul>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Object literals</h2>
-				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class">
-					<a name="state" class="tsd-anchor"></a>
-					<h3>state</h3>
-					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in index.ts:131</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>the state, meant to be modified</p>
-						</div>
-					</div>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="state.lowquality" class="tsd-anchor"></a>
-						<h3>low<wbr>Quality</h3>
-						<div class="tsd-signature tsd-kind-icon">low<wbr>Quality<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> = false</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in index.ts:135</li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="state.strokecolor" class="tsd-anchor"></a>
-						<h3>stroke<wbr>Color</h3>
-						<div class="tsd-signature tsd-kind-icon">stroke<wbr>Color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;#000000&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in index.ts:132</li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="state.strokesmoothness" class="tsd-anchor"></a>
-						<h3>stroke<wbr>Smoothness</h3>
-						<div class="tsd-signature tsd-kind-icon">stroke<wbr>Smoothness<span class="tsd-signature-symbol">:</span> <a href="../enums/_index_.strokesmoothness.html#advanced" class="tsd-signature-type">ADVANCED</a><span class="tsd-signature-symbol"> = StrokeSmoothness.ADVANCED</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in index.ts:134</li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="state.strokewidth" class="tsd-anchor"></a>
-						<h3>stroke<wbr>Width</h3>
-						<div class="tsd-signature tsd-kind-icon">stroke<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 2</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in index.ts:133</li>
-							</ul>
-						</aside>
-					</section>
 				</section>
 			</section>
 		</div>
@@ -584,8 +578,8 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_index_.paintingcontext.html#ctx" class="tsd-kind-icon">ctx</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-								<a href="_index_.paintingcontext.html#curve" class="tsd-kind-icon">curve</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_index_.paintingcontext.html#offscreenctx" class="tsd-kind-icon">offscreen<wbr>Ctx</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_index_.paintingcontext.html#pointerstrokes" class="tsd-kind-icon">pointer<wbr>Strokes</a>
@@ -594,13 +588,22 @@
 								<a href="_index_.paintingcontext.html#redostack" class="tsd-kind-icon">redo<wbr>Stack</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_index_.paintingcontext.html#requestingframe" class="tsd-kind-icon">requesting<wbr>Frame</a>
+								<a href="_index_.paintingcontext.html#state" class="tsd-kind-icon">state</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_index_.paintingcontext.html#strokepointers" class="tsd-kind-icon">stroke<wbr>Pointers</a>
 							</li>
 							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="_index_.paintingcontext.html#height" class="tsd-kind-icon">height</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
 								<a href="_index_.paintingcontext.html#strokes" class="tsd-kind-icon">strokes</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="_index_.paintingcontext.html#width" class="tsd-kind-icon">width</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_index_.paintingcontext.html#queuecommit" class="tsd-kind-icon">queue<wbr>Commit</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_index_.paintingcontext.html#redo" class="tsd-kind-icon">redo</a>
@@ -615,22 +618,10 @@
 								<a href="_index_.paintingcontext.html#render" class="tsd-kind-icon">render</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_index_.paintingcontext.html#renderbasicstroke" class="tsd-kind-icon">render<wbr>Basic<wbr>Stroke</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_index_.paintingcontext.html#rendersmoothstroke" class="tsd-kind-icon">render<wbr>Smooth<wbr>Stroke</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_index_.paintingcontext.html#renderstrokepaint" class="tsd-kind-icon">render<wbr>Stroke<wbr>Paint</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_index_.paintingcontext.html#undo" class="tsd-kind-icon">undo</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_index_.paintingcontext.html#update" class="tsd-kind-icon">update</a>
-							</li>
-							<li class=" tsd-kind-object-literal tsd-parent-kind-class">
-								<a href="_index_.paintingcontext.html#state" class="tsd-kind-icon">state</a>
+								<a href="_index_.paintingcontext.html#updatestyle" class="tsd-kind-icon">update<wbr>Style</a>
 							</li>
 						</ul>
 					</li>
@@ -644,9 +635,6 @@
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/_index_.istrokepaint.html" class="tsd-kind-icon">IStroke<wbr>Paint</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/_index_.istrokeremove.html" class="tsd-kind-icon">IStroke<wbr>Remove</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="../globals.html#tpoint" class="tsd-kind-icon">TPoint</a>
@@ -686,9 +674,6 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
 			</ul>
 		</div>
 	</div>

@@ -194,7 +194,6 @@ export default class PaintingContext {
       .createElement('canvas')!
       .getContext('2d')!
   ) {
-
     this.state = {
       strokeColor: '#000000',
       strokeWidth: 2,
