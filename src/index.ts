@@ -208,6 +208,8 @@ export default class PaintingContext {
     this.curve = curveBasis(offscreenCtx)
     this.registerEventListeners()
 
+    this.offscreenCtx.canvas.width = this.ctx.canvas.width
+    this.offscreenCtx.canvas.height = this.ctx.canvas.height
     this.offscreenCtx.lineJoin = 'round'
     this.offscreenCtx.lineCap = 'round'
 
