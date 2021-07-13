@@ -1,107 +1,87 @@
-import DoodlePad from '../module/index.js'
+import { Doodlepad } from "../publish/module/doodlepad.js";
 
-const inputer = (name, type, oninput, props = {}) => {
-  const div = document.createElement('div')
-  div.classList.add('inputer')
-  const input = document.createElement('input')
-  const label = document.createElement('label')
-  const output = document.createElement('output')
+const h = (tag, props, children) => {
+  const $el = document.createElement(tag);
 
-  Object.entries(props).forEach(([prop, value]) =>
-    input.setAttribute(prop, value)
-  )
-
-  if (type) {
-    input.type = type
+  for (let propName in props) {
+    const prop = props[propName];
+    typeof prop === "string"
+      ? $el.setAttribute(propName, prop)
+      : Reflect.set($el, propName, prop);
   }
+
+  $el.append(...children)
+
+  return $el;
+};
+
+const Input = (name, props = {}, oninput) => {
+  const output = h("output", { for: name }, []);
+  const input = h(
+    "input",
+    {
+      id: name,
+      onclick: eventHandler,
+      oninput: eventHandler,
+      onchange: eventHandler,
+      ...props,
+    },
+    []
+  );
 
   function eventHandler(event) {
-    oninput(event)
-    output.value = input.value
-    output.textContent = input.value
-    // console.log(dp.state)
+    oninput(event, input);
+    output.value = input.value;
+    output.textContent = input.value;
   }
 
-  input.addEventListener('input', eventHandler)
-  input.addEventListener('change', eventHandler)
-  input.addEventListener('click', eventHandler)
+  const div = h("div", { class: "Input" }, [
+    h("label", { for: name }, [name]),
+    input,
+    output,
+  ]);
 
-  label.textContent = `${name} `
-  div.appendChild(label)
-  div.appendChild(input)
-  div.appendChild(output)
-  document.body.appendChild(div)
+  eventHandler({ currentTarget: input });
 
-  eventHandler({ currentTarget: input })
+  return div;
+};
 
-  return { label, input, output }
-}
+const $canvas = document.createElement("canvas");
+document.body.append($canvas);
+$canvas.width = $canvas.clientWidth;
+$canvas.height = $canvas.clientHeight;
 
-const canvas = document.createElement('canvas')
-const ctx = canvas.getContext('2d')
-const dp = new DoodlePad(ctx)
-dp.width = 500
-dp.height = 500
-dp.state.strokeColor = '#5555'
-canvas.draw = dp
+const ctx = $canvas.getContext("2d");
+const paint = new Doodlepad(ctx);
 
-const state = {
-  color: '#000',
-  opacity: 1,
-}
 
-document.body.appendChild(canvas)
-
-inputer(
-  'backgroundColor',
-  'color',
-  (event) => {
-    dp.state.backgroundColor = event.currentTarget.value
-    dp.render()
-  },
-  { value: '#fafafa' }
+document.body.prepend(
+  h('form', {}, [
+    Input(
+      "background color",
+      { type: "color", value: "#fafafa" },
+      (event, input) => {}
+    ),
+    Input(
+      "stroke color",
+      { type: "color", value: "#101010" },
+      (event, input) => {
+        paint.strokeColor = input.value
+      }
+    ),
+    Input(
+      "stroke size",
+      { type: "range", min: 0, max: 200, step: 1, value: 5 },
+      (event, input) => {
+        paint.strokeSize = input.valueAsNumber
+      }
+    ),
+    Input(
+      "stabilization",
+      { type: "range", min: 0, max: 1, step: 0.01, value: 0.75 },
+      (event, input) => {
+        paint.strokeSmoothing = input.valueAsNumber
+      }
+    ),
+  ])
 )
-
-inputer(
-  'strokeWidth',
-  'range',
-  (event) => {
-    dp.state.strokeWidth = parseInt(event.currentTarget.value)
-  },
-  { value: 10 }
-)
-
-const updateColor = () =>
-  (dp.state.strokeColor =
-    state.color + Math.round(state.opacity * 255).toString(16))
-
-inputer('strokeColor', 'color', (event) => {
-  state.color = event.currentTarget.value
-  updateColor()
-})
-
-inputer(
-  'opacity',
-  'range',
-  (event) => {
-    state.opacity = parseFloat(event.currentTarget.value)
-    updateColor()
-  },
-  { value: 1, min: 0, max: 1, step: 'any' }
-)
-
-inputer(
-  'strokeSmoothing',
-  'checkbox',
-  (event) => {
-    dp.state.strokeSmoothness = event.currentTarget.checked ? 1 : 0
-  },
-  { checked: true }
-)
-
-inputer('lowQuality', 'checkbox', (event) => {
-  dp.state.lowQuality = event.currentTarget.checked
-})
-
-inputer('undo', 'button', (event) => dp.undo())
-inputer('redo', 'button', (event) => dp.redo())

@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
-    <script
-      defer
-      src="//unpkg.com/es-module-shims@0.4.6/dist/es-module-shims.min.js"
-    ></script>
-    <script type="importmap-shim" src="import-map.json"></script>
-    <script type="module-shim" src="index.js"></script>
+    <title>doodlepad test demo</title>
+    <meta charset="utf-8" />
+    <script type="module" src="./index.js"></script>
     <style type="text/css">
+      html,
       body {
-        touch-action: none;
-        user-select: none;
-        overflow: hidden;
-      }
-      canvas {
-        box-shadow: 0px 0px 3px #333;
-      }
-      .inputer {
-        position: relative;
-        clear: both;
-        width: 500px;
-        display: flex;
-        float: right;
+        padding: 0;
+        margin: 0;
       }
 
-      .inputer * {
-        flex: 1;
-        margin: 0 auto;
-      }
-
-      .canvas-container {
-        position: relative;
-      }
-
-      .canvas-container canvas {
+      form {
         position: absolute;
+        display: grid;
+        margin: 0.5rem;
+        padding: 0.5rem;
+
+        background-color: #fffc;
+        border: 2px solid #cccc;
+      }
+
+      .Input {
+        display: flex;
+      }
+
+      .Input label {
+        width: 150px;
+      }
+
+      .Input input {
+        order: 1;
+      }
+
+      .Input output {
+        order: 0;
+        width: 150px;
+      }
+
+      canvas {
+        background: white;
+        width: 100vw;
+        height: 100vh;
       }
     </style>
   </head>
