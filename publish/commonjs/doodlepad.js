@@ -17,20 +17,27 @@ class Doodlepad {
         color: "#2685CB",
         smoothing: 0.1
     };
+    set backgroundColor(color) {
+        this.style.backgroundColor = color;
+        this.render();
+    }
     set strokeSize(size) {
         this.strokeStyle.size = size;
         this.ctx.lineWidth = size;
     }
     set strokeColor(color) {
         this.strokeStyle.color = color;
-        this.ctx.strokeStyle = color;
+        this.setCanvasStyle(this.strokeStyle);
     }
     set strokeSmoothing(num) {
         this.strokeStyle.smoothing = Math.max(1 - num, 0.05);
     }
+    setStrokeStyle(style) {
+        this.setCanvasStyle(this.strokeStyle = style);
+    }
     setCanvasStyle(style) {
         this.ctx.lineWidth = style.size;
-        this.ctx.strokeStyle = style.color;
+        this.ctx.strokeStyle = style.color === 'currentBackground' ? this.style.backgroundColor : style.color;
     }
     constructor(ctx, target = ctx.canvas) {
         this.ctx = ctx;

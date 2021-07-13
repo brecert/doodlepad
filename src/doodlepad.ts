@@ -4,7 +4,7 @@ export type Point = [number, number];
 
 export interface StrokeStyle {
   size: number;
-  color: string;
+  color: string | 'currentBackground';
   smoothing: number
 }
 
@@ -38,6 +38,11 @@ export class Doodlepad {
     smoothing: 0.1
   };
 
+  set backgroundColor(color: string) {
+    this.style.backgroundColor = color
+    this.render()
+  }
+
   set strokeSize(size: number) {
     this.strokeStyle.size = size;
     this.ctx.lineWidth = size;
@@ -45,16 +50,20 @@ export class Doodlepad {
 
   set strokeColor(color: string) {
     this.strokeStyle.color = color;
-    this.ctx.strokeStyle = color;
+    this.setCanvasStyle(this.strokeStyle)
   }
 
   set strokeSmoothing(num: number) {
     this.strokeStyle.smoothing = Math.max(1 - num, 0.05)
   }
 
+  setStrokeStyle(style: StrokeStyle) {
+    this.setCanvasStyle(this.strokeStyle = style)
+  }
+
   setCanvasStyle(style: StrokeStyle) {
     this.ctx.lineWidth = style.size;
-    this.ctx.strokeStyle = style.color;
+    this.ctx.strokeStyle = style.color === 'currentBackground' ? this.style.backgroundColor : style.color;
   }
 
   constructor(public ctx: CanvasRenderingContext2D, public target = ctx.canvas) {
