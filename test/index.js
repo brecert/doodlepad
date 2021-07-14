@@ -1,4 +1,4 @@
-import { Doodlepad } from "../publish/module/doodlepad.js";
+import { PaintingContext } from "../publish/module/doodlepad.js";
 
 const h = (tag, props, children) => {
   const $el = document.createElement(tag);
@@ -59,7 +59,7 @@ $canvas.width = $canvas.clientWidth;
 $canvas.height = $canvas.clientHeight;
 
 const ctx = $canvas.getContext("2d");
-const paint = new Doodlepad(ctx);
+const paint = new PaintingContext(ctx);
 
 const BRUSH_LIST = [{}, { color: "currentBackground" }];
 

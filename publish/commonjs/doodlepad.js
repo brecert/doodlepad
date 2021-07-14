@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Doodlepad = void 0;
+exports.PaintingContext = void 0;
 const util_js_1 = require("./util.js");
-class Doodlepad {
+class PaintingContext {
     ctx;
     target;
     activeStrokes = new Map();
@@ -167,4 +167,4 @@ class Doodlepad {
         }
     }
 }
-exports.Doodlepad = Doodlepad;
+exports.PaintingContext = PaintingContext;

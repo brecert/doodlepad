@@ -31,7 +31,7 @@ export interface ActivePointerData extends PointerData {
   smoothingFn?: number
 }
 
-export class Doodlepad {
+export class PaintingContext {
   activeStrokes: Map<number, Stroke> = new Map();
   pointerData: Map<number, ActivePointerData> = new Map();
   strokeHistory: Stroke[] = [];
