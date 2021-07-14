@@ -58,6 +58,4 @@ web_modules/
 .pnp.*
 
 # build files
-dist
-module
-types
+publish/site

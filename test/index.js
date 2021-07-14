@@ -5,6 +5,7 @@ const h = (tag, props, children) => {
 
   for (let propName in props) {
     const prop = props[propName];
+
     typeof prop === "string"
       ? $el.setAttribute(propName, prop)
       : Reflect.set($el, propName, prop);
@@ -45,13 +46,12 @@ const Input = (name, props = {}, oninput) => {
     output,
   ]);
 
+  input.update = update
   div.update = update;
   update();
 
   return div;
 };
-
-// Main
 
 const $canvas = document.createElement("canvas");
 document.body.append($canvas);
@@ -61,11 +61,8 @@ $canvas.height = $canvas.clientHeight;
 const ctx = $canvas.getContext("2d");
 const paint = new PaintingContext(ctx);
 
-const BRUSH_LIST = [{}, { color: "currentBackground" }];
-
-let currentBrush = BRUSH_LIST[0];
-
-paint.setStrokeStyle(currentBrush);
+let $strokeColor;
+let $erase;
 
 const inputs = [
   Input(
@@ -76,7 +73,13 @@ const inputs = [
     }
   ),
   Input("stroke color", { type: "color", value: "#101010" }, (event, input) => {
+    $strokeColor = input;
     paint.strokeColor = input.value;
+
+    if($erase) {
+      $erase.checked = false
+      $erase.update()
+    }
   }),
   Input(
     "stroke size",
@@ -93,16 +96,12 @@ const inputs = [
     }
   ),
   Input("erase", { type: "checkbox", checked: false }, (event, input) => {
+    $erase = input;
+
     input.value = input.checked;
-
-    if (input.checked) {
-      // BRUSH_LIST[1].strokeSmoothing = BRUSH_LIST[1].strokeSmoothing
-      currentBrush = BRUSH_LIST[1] = { ...BRUSH_LIST[0], ...BRUSH_LIST[1] };
-    } else {
-      currentBrush = BRUSH_LIST[0];
-    }
-
-    paint.setStrokeStyle(currentBrush);
+    paint.strokeColor = input.checked
+      ? "currentBackground"
+      : $strokeColor.value;
   }),
 ];
 
@@ -117,8 +116,8 @@ window.addEventListener("resize", () => {
   requestAnimationFrame(() => {
     $canvas.width = $canvas.clientWidth;
     $canvas.height = $canvas.clientHeight;
-    paint.ctx.lineJoin = 'round'
-    paint.ctx.lineCap = 'round'
+    paint.ctx.lineJoin = "round";
+    paint.ctx.lineCap = "round";
     paint.render();
   });
 });

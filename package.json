@@ -15,7 +15,7 @@
 		"build:types": "tsc -p ./configs/tsconfig.types.json",
 		"build:module": "tsc -p ./configs/tsconfig.module.json",
 		"build:commonjs": "tsc -p ./configs/tsconfig.commonjs.json",
-		"build:site": "npx vite build ./test/ --outDir ../publish/site/ --base ./",
+		"build:site": "rm -r ./publish/site && npx vite build ./test/ --outDir ../publish/site/ --base ./",
 		"test": "npx vite ./test",
 		"publish:site": "npx gh-pages -d ./publish/site"
 	},
