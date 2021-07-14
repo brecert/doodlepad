@@ -3,8 +3,17 @@ import { distanceBetween, lerpPoint } from "./util.js";
 export type Point = [number, number];
 
 export interface StrokeStyle {
+  /** The size of the stroke in canvas pixels */
   size: number;
+
+  /**
+   * The color of the stroke.
+   * 
+   * `currentBackground` will use the background of the Doodlepad instance. 
+   */
   color: string | 'currentBackground';
+
+  /** The amount of smoothing to apply to the stroke. 1 is none and 0 is the maximum. */
   smoothing: number
 }
 
@@ -53,6 +62,7 @@ export class Doodlepad {
     this.setCanvasStyle(this.strokeStyle)
   }
 
+  /** Sets the smoothing of the stroke. 1 is the maximum amount of smoothing, 0 is no smoothing. */
   set strokeSmoothing(num: number) {
     this.strokeStyle.smoothing = Math.max(1 - num, 0.05)
   }
@@ -185,6 +195,7 @@ export class Doodlepad {
     }
   }
 
+  /** re-renders the entire stroke history. */
   render() {
     this.ctx.fillStyle = this.style.backgroundColor
     this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
