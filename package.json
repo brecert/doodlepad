@@ -11,12 +11,13 @@
 		"module"
 	],
 	"scripts": {
-		"build": "npm run build:types && npm run build:module && npm run build:commonjs",
+		"build": "npm run build:types && npm run build:module && npm run build:commonjs && npm run build:site",
 		"build:types": "tsc -p ./configs/tsconfig.types.json",
 		"build:module": "tsc -p ./configs/tsconfig.module.json",
 		"build:commonjs": "tsc -p ./configs/tsconfig.commonjs.json",
+		"build:site": "npx vite build ./test --outDir ../publish/site",
 		"test": "npx vite ./test",
-		"deploy": "npx vite build ./test --outDir ../publish/site && npx gh-pages -d ./publish/site"
+		"publish:site": "npx gh-pages -d ./publish/site"
 	},
 	"author": "bree",
 	"license": "ISC",
