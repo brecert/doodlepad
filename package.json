@@ -3,22 +3,34 @@
 	"name": "doodlepad",
 	"version": "4.0.0",
 	"description": "a simple pad to doodle on",
-	"homepage": "https://github.com/Brecert/doodlepad#readme",
+	"homepage": "https://github.com/brecert/doodlepad#readme",
 	"module": "module/doodlepad.js",
 	"main": "module/doodlepad.js",
 	"types": "types/doodlepad.d.ts",
+	"exports": {
+		".": {
+			"require": "./publish/commonjs/doodlepad.js",
+			"import": "./publish/module/doodlepad.js",
+			"default": "./publish/module/doodlepad.js"
+		},
+		"./": {
+			"require": "./publish/commonjs/",
+			"import": "./publish/module/",
+			"default": "./publish/module/"
+		}
+	},
 	"files": [
 		"publish/commonjs",
 		"publish/module",
 		"publish/types"
 	],
 	"scripts": {
+		"test": "npx vite ./test",
 		"build": "npm run build:types && npm run build:module && npm run build:commonjs && npm run build:site",
 		"build:types": "tsc -p ./configs/tsconfig.types.json",
 		"build:module": "tsc -p ./configs/tsconfig.module.json",
 		"build:commonjs": "tsc -p ./configs/tsconfig.commonjs.json",
 		"build:site": "rm -r ./publish/site; npx vite build ./test/ --outDir ../publish/site/ --base ./",
-		"test": "npx vite ./test",
 		"publish:site": "npx gh-pages -d ./publish/site"
 	},
 	"author": "bree",
