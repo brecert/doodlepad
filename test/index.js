@@ -112,3 +112,13 @@ window.addEventListener("keydown", (e) => {
   if (e.ctrlKey && e.key === "z") paint.undoStroke();
   if (e.ctrlKey && e.key === "Z") paint.redoStroke();
 });
+
+window.addEventListener("resize", () => {
+  requestAnimationFrame(() => {
+    $canvas.width = $canvas.clientWidth;
+    $canvas.height = $canvas.clientHeight;
+    paint.ctx.lineJoin = 'round'
+    paint.ctx.lineCap = 'round'
+    paint.render();
+  });
+});
