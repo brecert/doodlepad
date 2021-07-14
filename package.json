@@ -8,7 +8,9 @@
 	"main": "module/doodlepad.js",
 	"types": "types/doodlepad.d.ts",
 	"files": [
-		"module"
+		"publish/commonjs",
+		"publish/module",
+		"publish/types"
 	],
 	"scripts": {
 		"build": "npm run build:types && npm run build:module && npm run build:commonjs && npm run build:site",
