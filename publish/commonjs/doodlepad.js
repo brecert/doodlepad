@@ -29,6 +29,7 @@ class Doodlepad {
         this.strokeStyle.color = color;
         this.setCanvasStyle(this.strokeStyle);
     }
+    /** Sets the smoothing of the stroke. 1 is the maximum amount of smoothing, 0 is no smoothing. */
     set strokeSmoothing(num) {
         this.strokeStyle.smoothing = Math.max(1 - num, 0.05);
     }
@@ -135,6 +136,7 @@ class Doodlepad {
             }
         }
     }
+    /** re-renders the entire stroke history. */
     render() {
         this.ctx.fillStyle = this.style.backgroundColor;
         this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
