@@ -46,7 +46,7 @@ const Input = (name, props = {}, oninput) => {
     output,
   ]);
 
-  input.update = update
+  input.update = update;
   div.update = update;
   update();
 
@@ -76,9 +76,9 @@ const inputs = [
     $strokeColor = input;
     paint.strokeColor = input.value;
 
-    if($erase) {
-      $erase.checked = false
-      $erase.update()
+    if ($erase) {
+      $erase.checked = false;
+      $erase.update();
     }
   }),
   Input(

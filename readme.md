@@ -18,7 +18,7 @@ to prevent strokes from being mis-inputed and cancelled
 
 ## Example
 ```js
-import { PaintingContext } from 'doodlepad'
+import { PaintingContext } from 'https://unpkg.com/doodlepad?module'
 
 const canvas = document.createElement('canvas')
 const ctx = canvas.getContext('2d')
@@ -27,5 +27,5 @@ const paint = new PaintingContext(ctx)
 paint.strokeSize = 5
 paint.strokeSmoothing = 0.5
 
-document.appendChild(canvas)
+document.body.appendChild(canvas)
 ```
