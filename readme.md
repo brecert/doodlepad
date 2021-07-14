@@ -18,7 +18,7 @@ to prevent strokes from being mis-inputed and cancelled
 
 ## Example
 ```js
-import { Doodlepad } from 'doodlepad'
+import { PaintingContext } from 'doodlepad'
 
 const canvas = document.createElement('canvas')
 const ctx = canvas.getContext('2d')
