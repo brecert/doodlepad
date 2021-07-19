@@ -1,7 +1,7 @@
 {
 	"type": "module",
 	"name": "doodlepad",
-	"version": "4.0.1",
+	"version": "4.0.2",
 	"description": "a simple pad to doodle on",
 	"homepage": "https://github.com/brecert/doodlepad#readme",
 	"main": "publish/module/doodlepad.js",
@@ -30,7 +30,9 @@
 		"build:types": "tsc -p ./configs/tsconfig.types.json",
 		"build:module": "tsc -p ./configs/tsconfig.module.json",
 		"build:commonjs": "tsc -p ./configs/tsconfig.commonjs.json",
-		"build:site": "rm -r ./publish/site; npx vite build ./test/ --outDir ../publish/site/ --base ./",
+		"build:site": "npm run build:site:clean && npm run build:site:bundle",
+		"build:site:clean": "rm -rf ./publish/site",
+		"build:site:bundle": "npx vite build ./test/ --outDir ../publish/site/ --base ./",
 		"publish:site": "npx gh-pages -d ./publish/site"
 	},
 	"author": "bree",

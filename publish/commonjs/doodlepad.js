@@ -3,20 +3,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaintingContext = void 0;
 const util_js_1 = require("./util.js");
 class PaintingContext {
-    ctx;
-    target;
-    activeStrokes = new Map();
-    pointerData = new Map();
-    strokeHistory = [];
-    undoHistory = [];
-    style = {
-        backgroundColor: '#fff'
-    };
-    strokeStyle = {
-        size: 5,
-        color: "#2685CB",
-        smoothing: 0.1
-    };
+    constructor(ctx, target = ctx.canvas) {
+        this.ctx = ctx;
+        this.target = target;
+        this.activeStrokes = new Map();
+        this.pointerData = new Map();
+        this.strokeHistory = [];
+        this.undoHistory = [];
+        this.style = {
+            backgroundColor: '#fff'
+        };
+        this.strokeStyle = {
+            size: 5,
+            color: "#2685CB",
+            smoothing: 0.1
+        };
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        const options = { capture: true, passive: true };
+        [
+            "pointerdown",
+            "pointermove",
+            "pointerup",
+            "pointerout",
+            "pointercancel",
+            "pointerleave",
+        ].forEach((eventName) => target.addEventListener(eventName, this, options));
+    }
     set backgroundColor(color) {
         this.style.backgroundColor = color;
         this.render();
@@ -39,21 +52,6 @@ class PaintingContext {
     setCanvasStyle(style) {
         this.ctx.lineWidth = style.size;
         this.ctx.strokeStyle = style.color === 'currentBackground' ? this.style.backgroundColor : style.color;
-    }
-    constructor(ctx, target = ctx.canvas) {
-        this.ctx = ctx;
-        this.target = target;
-        ctx.lineJoin = 'round';
-        ctx.lineCap = 'round';
-        const options = { capture: true, passive: true };
-        [
-            "pointerdown",
-            "pointermove",
-            "pointerup",
-            "pointerout",
-            "pointercancel",
-            "pointerleave",
-        ].forEach((eventName) => target.addEventListener(eventName, this, options));
     }
     drawPoint({ point, stroke, pointerData }) {
         this.ctx.beginPath();
